@@ -15,6 +15,7 @@ The project aims to provide an idiomatic Swift language wrapper for the
 If you are familiar with the C-based GCD API, you can continually apply your knowledge
 when writing Swift code, because the DispatchKit API closely matches the original API.
 
+
 Otherwise, if you have little or no experience with GCD, then probably the DispatchKit is
 a good place to start playing with, as it allows you to learn GCD in a much more cleaner way.
 Swift is a more type safe and less error-prone language than Objective-C, and the DispatchKit
