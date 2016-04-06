@@ -38,8 +38,7 @@ public struct DispatchQueue : DispatchObject, DispatchResumable {
             }
 
             self.rawValue = rawValue
-        } else if #available(iOS 8.0, *) {
-            // iOS 8 and later: apply QOS class
+        } else {
             guard
                 let qosAttr = dispatch_queue_attr_make_with_qos_class(
                     attr.rawValue, qosClass.rawClass, Int32(relativePriority)),
@@ -49,17 +48,6 @@ public struct DispatchQueue : DispatchObject, DispatchResumable {
             }
 
             self.rawValue = rawValue
-        } else {
-            guard let rawValue = dispatch_queue_create(label, attr.rawValue) else {
-                return nil
-            }
-
-            self.rawValue = rawValue
-
-            // iOS 7 and earlier: simulate QOS class by applying a target queue.
-            let priority = DispatchQueuePriority(qosClass: qosClass)
-            let target = dispatch_get_global_queue(priority.rawValue, 0)
-            dispatch_set_target_queue(rawValue, target)
         }
     }
 

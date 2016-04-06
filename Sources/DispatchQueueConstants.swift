@@ -32,7 +32,6 @@ public enum DispatchQOSClass {
 
     // Performs mapping as specified in the documentation.
     public init(priority: DispatchQueuePriority) {
-        if #available(iOS 8.0, *) {
             switch priority {
             case .High:
                 self = .UserInitiated
@@ -43,12 +42,8 @@ public enum DispatchQOSClass {
             case .Default:
                 self = .Default
             }
-        } else {
-            self = .Unspecified
-        }
     }
 
-    @available(iOS 8.0, *)
     public var rawClass: qos_class_t {
         switch self {
         case .Unspecified:
@@ -67,11 +62,7 @@ public enum DispatchQOSClass {
     }
 
     public var rawValue: Int {
-        if #available(iOS 8.0, *) {
-            return Int(rawClass.rawValue)
-        } else {
-            return 0
-        }
+        return Int(rawClass.rawValue)
     }
 
 }
