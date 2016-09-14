@@ -28,10 +28,7 @@ public struct DispatchSemaphore: DispatchObject, DispatchWaitable {
     public init!(_ value: Int) {
         assert(0 <= value)
 
-        guard let rawValue = dispatch_semaphore_create(value) else {
-            return nil
-        }
-
+        let rawValue = dispatch_semaphore_create(value)
         self.rawValue = rawValue
     }
 

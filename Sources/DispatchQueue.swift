@@ -33,19 +33,12 @@ public struct DispatchQueue : DispatchObject, DispatchResumable {
                "Invalid parameter: relative_priority")
 
         if qosClass == .Unspecified {
-            guard let rawValue = dispatch_queue_create(label, attr.rawValue) else {
-                return nil
-            }
-
+            let rawValue = dispatch_queue_create(label, attr.rawValue)
             self.rawValue = rawValue
         } else {
-            guard
-                let qosAttr = dispatch_queue_attr_make_with_qos_class(
-                    attr.rawValue, qosClass.rawClass, Int32(relativePriority)),
-                let rawValue = dispatch_queue_create(label, qosAttr)
-            else {
-                return nil
-            }
+            let qosAttr = dispatch_queue_attr_make_with_qos_class(
+                attr.rawValue, qosClass.rawClass, Int32(relativePriority))
+            let rawValue = dispatch_queue_create(label, qosAttr)
 
             self.rawValue = rawValue
         }

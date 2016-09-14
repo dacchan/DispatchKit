@@ -31,10 +31,7 @@ public struct DispatchIO: DispatchObject {
          fd: dispatch_fd_t,
          queue: DispatchQueue? = nil, cleanup: CleanupHandler! = nil) {
 
-        guard let rawValue = dispatch_io_create(type.rawValue, fd, queue?.rawValue, cleanup) else {
-            return nil
-        }
-
+        let rawValue = dispatch_io_create(type.rawValue, fd, (queue?.rawValue)!, cleanup)
         self.rawValue = rawValue
     }
 
@@ -42,10 +39,7 @@ public struct DispatchIO: DispatchObject {
          path: String, oflag: CInt = O_RDONLY, mode: mode_t = 0o644,
          queue: DispatchQueue? = nil, cleanup: CleanupHandler! = nil) {
 
-        guard let rawValue = dispatch_io_create_with_path(type.rawValue, path, oflag, mode, queue?.rawValue, cleanup) else {
-            return nil
-        }
-
+        let rawValue = dispatch_io_create_with_path(type.rawValue, path, oflag, mode, (queue?.rawValue)!, cleanup)
         self.rawValue = rawValue
     }
 
@@ -53,10 +47,7 @@ public struct DispatchIO: DispatchObject {
          io: DispatchIO,
          queue: DispatchQueue? = nil, cleanup: CleanupHandler! = nil) {
 
-        guard let rawValue = dispatch_io_create_with_io(type.rawValue, io.rawValue, queue?.rawValue, cleanup) else {
-            return nil
-        }
-
+        let rawValue = dispatch_io_create_with_io(type.rawValue, io.rawValue, (queue?.rawValue)!, cleanup)
         self.rawValue = rawValue
     }
 

@@ -26,10 +26,7 @@ public struct DispatchGroup: DispatchObject, DispatchEnterable, DispatchWaitable
     }
 
     public init!() {
-        guard let rawValue = dispatch_group_create() else {
-            return nil
-        }
-
+        let rawValue = dispatch_group_create()
         self.rawValue = rawValue
     }
 
