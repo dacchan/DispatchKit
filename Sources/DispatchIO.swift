@@ -66,7 +66,7 @@ public struct DispatchIO: DispatchObject {
 
         dispatch_write(fd, data.rawValue, queue.rawValue) {
             (data, error) in
-            handler(DispatchData<T>(rawValue: data), Int(error))
+            handler(DispatchData<T>(rawValue: data!), Int(error))
         }
     }
 
@@ -76,7 +76,7 @@ public struct DispatchIO: DispatchObject {
 
         dispatch_io_read(rawValue, offset, length, queue.rawValue) {
             (done, data, error) in
-            handler(done, DispatchData<T>(rawValue: data), Int(error))
+            handler(done, DispatchData<T>(rawValue: data!), Int(error))
         }
     }
 
@@ -85,7 +85,7 @@ public struct DispatchIO: DispatchObject {
 
         dispatch_io_write(rawValue, offset, data.rawValue, queue.rawValue) {
             (done, data, error) in
-            handler(done, DispatchData<T>(rawValue: data), Int(error))
+            handler(done, DispatchData<T>(rawValue: data!), Int(error))
         }
     }
 
